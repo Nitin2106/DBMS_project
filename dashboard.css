@@ -1,0 +1,689 @@
+:root {
+    --primary: #3498db;
+    --primary-dark: #2980b9;
+    --success: #2ecc71;
+    --success-dark: #27ae60;
+    --danger: #e74c3c;
+    --danger-dark: #c0392b;
+    --text: #ffffff;
+    --text-secondary: #bdc3c7;
+    --dark-bg: #1e1e2f;
+    --darker-bg: #151521;
+    --border: #2c2c44;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--dark-bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-top: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Reset button styles */
+button {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+/* Base button styles */
+.btn-base {
+    position: relative !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    transition: all 0.3s ease !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+    cursor: pointer !important;
+    font-size: 0.9rem !important;
+    padding: 10px 20px !important;
+    color: white !important;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
+}
+
+/* Add Student Button */
+button[onclick="showAddStudentModal()"].btn-base {
+    background: linear-gradient(135deg, #3498db, #2980b9) !important;
+    padding: 12px 28px !important;
+    margin: 1rem 0 !important;
+    font-size: 1rem !important;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3) !important;
+}
+
+button[onclick="showAddStudentModal()"].btn-base:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4) !important;
+}
+
+/* Modify Button */
+button.modify-btn {
+    background: linear-gradient(135deg, #2ecc71, #27ae60) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3) !important;
+    margin-right: 5px !important;
+}
+
+button.modify-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4) !important;
+}
+
+/* Delete Button */
+button.delete-btn {
+    background: linear-gradient(135deg, #e74c3c, #c0392b) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3) !important;
+}
+
+button.delete-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4) !important;
+}
+
+/* Modal Buttons */
+#addStudentModal button[type="submit"],
+#modifyStudentModal button[type="submit"] {
+    background: linear-gradient(135deg, #2ecc71, #27ae60) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3) !important;
+}
+
+#addStudentModal button[type="button"],
+#modifyStudentModal button[type="button"] {
+    background: linear-gradient(135deg, #95a5a6, #7f8c8d) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(149, 165, 166, 0.3) !important;
+}
+
+/* Ripple effect */
+.ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.3) 10%, transparent 10.01%);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transform: scale(10, 10);
+    opacity: 0;
+    transition: transform 0.5s, opacity 1s;
+}
+
+.ripple:active::after {
+    transform: scale(0, 0);
+    opacity: 0.3;
+    transition: 0s;
+}
+
+/* Hover effects */
+.btn-base:hover {
+    transform: translateY(-2px) !important;
+}
+
+.btn-base:active {
+    transform: scale(0.95) !important;
+}
+
+/* Shine effect */
+.btn-base::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: all 0.5s ease;
+}
+
+.btn-base:hover::before {
+    left: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .btn-base {
+        padding: 8px 16px !important;
+        font-size: 0.85rem !important;
+    }
+    
+    button[onclick="showAddStudentModal()"].btn-base {
+        padding: 10px 20px !important;
+    }
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 2rem 0;
+    background-color: var(--darker-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+th {
+    background-color: var(--primary);
+    color: var(--text);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 1.2rem 1rem;
+    font-size: 0.9rem;
+}
+
+td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+}
+
+tr:hover td {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: var(--text);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content, #addStudentModal form, #modifyStudentModal form {
+    background-color: var(--darker-bg);
+    margin: 5% auto;
+    padding: 2rem;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Form Styles */
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: var(--dark-bg);
+    color: var(--text);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* Loading State */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Success Message Animation */
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-20px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-20px); }
+}
+
+.success-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--success);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    animation: fadeInOut 3s ease forwards;
+    box-shadow: var(--shadow);
+}
+
+/* Error Message Animation */
+.error-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--danger);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    animation: fadeInOut 3s ease forwards;
+    box-shadow: var(--shadow);
+}
+
+/* Logout Button */
+form[action="logout.php"] button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+form[action="logout.php"] button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+}
+
+form[action="logout.php"] button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: all 0.5s ease;
+}
+
+form[action="logout.php"] button:hover::before {
+    left: 100%;
+}
+
+/* Button Loading State */
+.btn-loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.btn-loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    margin: -10px 0 0 -10px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: button-loading-spinner 0.8s linear infinite;
+}
+
+@keyframes button-loading-spinner {
+    from {
+        transform: rotate(0turn);
+    }
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: var(--darker-bg);
+    padding: 1rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #333;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+}
+
+.nav-links li a {
+    display: block;
+    padding: 0.8rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.nav-links li a:hover {
+    background-color: var(--primary);
+}
+
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    background-color: var(--dark-bg);
+}
+
+.section {
+    background-color: var(--darker-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+/* Add these new styles */
+.hidden {
+    display: none;
+}
+
+.low-attendance {
+    color: #ff4444;
+    font-weight: bold;
+}
+
+.attendance-list {
+    overflow-x: auto;
+}
+
+#attendanceTable th, #attendanceTable td {
+    text-align: center;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: var(--darker-bg);
+    margin: 15% auto;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+}
+
+.edit-btn {
+    padding: 0.5rem 1rem;
+    background-color: var(--primary);
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}
+
+.cancel {
+    background-color: #f44336;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #333;
+    border-radius: 4px;
+    background-color: var(--dark-bg);
+    color: var(--text);
+    margin-bottom: 1rem;
+}
+
+/* Add these styles to your existing dashboard.css */
+.grades-list {
+    overflow-x: auto;
+}
+
+.subject-marks {
+    margin-bottom: 1rem;
+}
+
+.subject-marks label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+}
+
+.grade-a {
+    color: #4CAF50;
+}
+
+.grade-b {
+    color: #2196F3;
+}
+
+.grade-c {
+    color: #FFC107;
+}
+
+.grade-d {
+    color: #FF9800;
+}
+
+.grade-f {
+    color: #f44336;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+th {
+    background-color: var(--darker-bg);
+    color: var(--primary);
+}
+
+.edit-btn {
+    padding: 0.5rem 1rem;
+    background-color: var(--primary);
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+    background-color: var(--darker-bg);
+    margin: 15% auto;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+}
+
+.cancel {
+    background-color: #f44336;
+    margin-top: 1rem;
+}
+
+.profile-card {
+    background-color: var(--darker-bg);
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.profile-card h3 {
+    margin-top: 0;
+    color: var(--primary);
+}
+
+.profile-card p {
+    margin: 0.5rem 0;
+}
+
+#gradesSummary {
+    border-top: 2px solid var(--primary);
+}
+
+#gradesSummary td {
+    padding: 1rem;
+}
+
+.modify-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 5px;
+}
+
+.modify-btn:hover {
+    background-color: #45a049;
+}
+
+.delete-btn {
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.delete-btn:hover {
+    background-color: #cc0000;
+}
+
+#modifyStudentModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 1000;
+}
+
+#modifyStudentModal form {
+    background-color: var(--darker-bg);
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+}
+
+#modifyStudentModal input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: var(--dark-bg);
+    color: white;
+}
+
+#modifyStudentModal button {
+    padding: 8px 16px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#modifyStudentModal button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#modifyStudentModal button[type="button"] {
+    background-color: #666;
+    color: white;
+}
